@@ -146,7 +146,8 @@ class ClipExtractor:
             for clip_path in clip_paths:
                 try:
                     os.remove(clip_path)
-                except:
+                except (OSError, FileNotFoundError) as e:
+                    # Log error but continue - temp files are not critical
                     pass
             
             return True

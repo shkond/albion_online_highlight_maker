@@ -26,9 +26,9 @@ class TestVideoProcessor(unittest.TestCase):
     
     def test_is_red_screen_not_red(self):
         """Test red screen detection with non-red frame."""
-        # Create blue frame
+        # Create blue frame (intentionally non-red to verify detection works)
         frame = np.zeros((1080, 1920, 3), dtype=np.uint8)
-        frame[:, :, 0] = 200  # Blue channel (BGR format)
+        frame[:, :, 0] = 200  # Blue channel in BGR format
         
         is_red = VideoProcessor.is_red_screen(frame)
         self.assertFalse(is_red)

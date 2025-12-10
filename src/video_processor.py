@@ -27,6 +27,8 @@ class VideoProcessor:
     # Red screen threshold for death detection
     RED_THRESHOLD = 150
     RED_RATIO_THRESHOLD = 0.6
+    # Small epsilon to prevent division by zero in color ratio calculation
+    COLOR_EPSILON = 0.1
     
     def __init__(self):
         pass
@@ -67,7 +69,7 @@ class VideoProcessor:
         # Check if red is dominant and above threshold
         is_red = (r > VideoProcessor.RED_THRESHOLD and 
                   r > b and r > g and 
-                  r / (b + g + 0.1) > VideoProcessor.RED_RATIO_THRESHOLD)
+                  r / (b + g + VideoProcessor.COLOR_EPSILON) > VideoProcessor.RED_RATIO_THRESHOLD)
         
         return is_red
     
